@@ -298,7 +298,7 @@ function showPrintModal(itemId, itemName, labelType) {
   if (quantityInput) {
     document.getElementById('printQuantity').value = quantityInput.value;
   } else {
-    document.getElementById('printQuantity').value = 1;
+    document.getElementById('printQuantity').value = 0;
   }
   
   // Wyświetl modal
