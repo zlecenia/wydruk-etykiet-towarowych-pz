@@ -1,0 +1,474 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1, h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .search-box {
+    width: 100% !important;
+  }
+}
+
+.search-box {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.refresh-btn, .action-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.refresh-btn:hover, .action-btn:hover {
+  background-color: #45a049;
+}
+
+.documents-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.documents-table th, .items-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #ddd;
+}
+
+.documents-table td, .items-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.documents-table tr:hover, .items-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.select-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.select-btn:hover {
+  background-color: #0b7dda;
+}
+
+.items-section {
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.checkbox-column {
+  width: 40px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .action-buttons button {
+    width: 200px;
+  }
+}
+
+.item-row {
+  margin-bottom: 8px;
+}
+
+.label-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.label-btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.small-label-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.big-label-btn {
+  background-color: #009688;
+  color: white;
+}
+
+.carton-label-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.foil-label-btn {
+  background-color: #673ab7;
+  color: white;
+}
+
+.small-label-btn:hover { background-color: #0b7dda; }
+.big-label-btn:hover { background-color: #00796b; }
+.carton-label-btn:hover { background-color: #e68a00; }
+.foil-label-btn:hover { background-color: #512da8; }
+
+/* Modal dla podglądu */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 900px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 2% auto;
+    padding: 15px;
+    width: 95%;
+  }
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #333;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .preview-actions {
+    margin-top: 10px;
+    align-self: flex-end;
+  }
+}
+
+.preview-type {
+  display: flex;
+}
+
+.preview-type button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.preview-type button.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.preview-frame {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #ddd;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .preview-frame {
+    height: 400px;
+  }
+}
+
+.zpl-content {
+  font-family: monospace;
+  white-space: pre;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  height: 100%;
+  overflow: auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #f2f2f2;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
+
+/* Print quantity modal */
+.print-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.print-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  position: relative;
+  text-align: center;
+}
+
+@media (max-width: 400px) {
+  .print-modal-content {
+    width: 90%;
+  }
+}
+
+.print-quantity-input {
+  width: 100px;
+  padding: 8px;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.print-confirm-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.print-confirm-btn:hover {
+  background-color: #45a049;
+}
+
+/* Responsywne tablice */
+@media screen and (max-width: 768px) {
+  .documents-table, .documents-table thead, .documents-table tbody, 
+  .documents-table th, .documents-table td, .documents-table tr {
+    display: block;
+  }
+  
+  .documents-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .documents-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .documents-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+  
+  .documents-table td:before {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .documents-table td:nth-of-type(1):before { content: "Numer dokumentu"; }
+  .documents-table td:nth-of-type(2):before { content: "Data"; }
+  .documents-table td:nth-of-type(3):before { content: "Kontrahent"; }
+  .documents-table td:nth-of-type(4):before { content: "Wartość netto"; }
+  .documents-table td:nth-of-type(5):before { content: "Wartość brutto"; }
+  .documents-table td:nth-of-type(6):before { content: "Akcje"; }
+  
+  .documents-table td:last-child {
+    text-align: center;
+    padding-left: 12px;
+  }
+  
+  /* Style dla tabeli pozycji */
+  .items-table thead {
+    display: none;
+  }
+  
+  .items-table, .items-table tbody, .items-table tr, .items-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .items-table tr {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .items-table td {
+    border: none;
+    padding: 5px 10px;
+  }
+  
+  .item-info {
+    margin-bottom: 10px;
+  }
+  
+  .item-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .item-details {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .item-quantity label {
+    font-weight: bold;
+  }
+  
+  .item-checkbox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}

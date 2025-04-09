@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Przyjęcia Zewnętrzne</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Przyjęcia Zewnętrzne</h1>
+    
+    <div class="controls">
+      <input type="text" class="search-box" placeholder="Szukaj dokumentu...">
+      <button class="refresh-btn">Odśwież</button>
+    </div>
+    
+    <!-- Tabela dokumentów przyjęcia zewnętrznego -->
+    <table class="documents-table">
+      <thead>
+        <tr>
+          <th>Numer dokumentu</th>
+          <th>Data</th>
+          <th>Kontrahent</th>
+          <th>Wartość netto</th>
+          <th>Wartość brutto</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody id="documentsTableBody">
+        <!-- Dane będą wstawiane dynamicznie przez JavaScript -->
+      </tbody>
+    </table>
+    
+    <div class="pagination">
+      <button>&laquo;</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>&raquo;</button>
+    </div>
+    
+    <!-- Sekcja z pozycjami dokumentu - początkowo ukryta, pokaże się po kliknięciu "Wybierz" -->
+    <div class="items-section" id="itemsSection" style="display: none;">
+      <h2 id="documentTitle">Pozycje dokumentu: </h2>
+      
+      <table class="items-table" id="itemsTable">
+        <thead>
+          <tr>
+            <th class="checkbox-column">Wybierz</th>
+            <th>Nazwa artykułu</th>
+            <th>Kod towaru</th>
+            <th>Ilość</th>
+            <th>Jednostka</th>
+            <th>Drukowanie</th>
+          </tr>
+        </thead>
+        <tbody id="itemsTableBody">
+          <!-- Dane będą wstawiane dynamicznie przez JavaScript -->
+        </tbody>
+      </table>
+      
+      <div class="action-buttons">
+        <button class="action-btn" id="printSelectedBtn">Drukuj zaznaczone</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal dla podglądu etykiety -->
+  <div class="modal" id="previewModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closePreviewBtn">&times;</span>
+      
+      <div class="preview-header">
+        <h2 id="previewTitle">Podgląd etykiety</h2>
+        <div class="preview-actions">
+          <button class="action-btn print-btn" id="printFromPreviewBtn">Drukuj</button>
+        </div>
+      </div>
+      
+      <div id="previewContent">
+        <iframe id="htmlPreview" class="preview-frame" style="display: none"></iframe>
+        <pre id="zplPreview" class="zpl-content" style="display: none"></pre>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal do wyboru ilości etykiet do druku -->
+  <div class="print-modal" id="printModal">
+    <div class="print-modal-content">
+      <span class="close-modal" id="closePrintModalBtn">&times;</span>
+      <h3 id="printModalTitle">Ilość etykiet do druku</h3>
+      <input type="number" class="print-quantity-input" id="printQuantity" value="1" min="1">
+      <button class="print-confirm-btn" id="printConfirmBtn">Drukuj</button>
+    </div>
+  </div>
+  
+  <!-- Dołączamy pliki JavaScript -->
+  <script src="data.js"></script>
+  <script src="labels.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
