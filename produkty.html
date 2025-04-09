@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista produktów</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    
+    .search-box {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 300px;
+    }
+    
+    .refresh-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .refresh-btn:hover {
+      background-color: #45a049;
+    }
+    
+    .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .products-table th {
+      background-color: #f2f2f2;
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+      white-space: nowrap;
+    }
+    
+    .products-table td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .products-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .select-btn {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    
+    .select-btn:hover {
+      background-color: #0b7dda;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .pagination button {
+      background-color: #f2f2f2;
+      border: none;
+      color: black;
+      padding: 8px 16px;
+      text-decoration: none;
+      margin: 0 4px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .pagination button.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    .pagination button:hover:not(.active) {
+      background-color: #ddd;
+    }
+    
+    /* Responsywne style dla mobilnych urządzeń */
+    @media screen and (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .search-box {
+        width: 100%;
+      }
+      
+      .products-table {
+        font-size: 12px;
+      }
+      
+      .products-table th, .products-table td {
+        padding: 6px 4px;
+      }
+    }
+    
+    /* Dla bardzo małych ekranów */
+    @media screen and (max-width: 576px) {
+      .products-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Lista produktów</h1>
+    
+    <div class="controls">
+      <input type="text" class="search-box" placeholder="Szukaj produktu..." id="searchBox">
+      <button class="refresh-btn" id="refreshBtn">Odśwież</button>
+    </div>
+    
+    <div style="overflow-x: auto;">
+      <table class="products-table" id="productsTable">
+        <thead>
+          <tr>
+            <th>Nazwa</th>
+            <th>T</th>
+            <th>Ilość</th>
+            <th>Stan</th>
+            <th>Stan min.</th>
+            <th>J.m.</th>
+            <th>Cena zakupu</th>
+            <th>Cena sprzedaży</th>
+            <th>Indeks kat.</th>
+            <th>Indeks handl.</th>
+            <th>Kod kreskowy</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Artykuły rolnicze</td>
+            <td>T</td>
+            <td>100,0000</td>
+            <td>100,0000</td>
+            <td>0,0000</td>
+            <td>kg.</td>
+            <td>100,00</td>
+            <td>200,00</td>
+            <td>ROL000001</td>
+            <td>ROL000001</td>
+            <td>5900000000404</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Narty ATOMICUS LUX</td>
+            <td>T</td>
+            <td>13,0000</td>
+            <td>13,0000</td>
+            <td>0,0000</td>
+            <td>para</td>
+            <td>3 240,88</td>
+            <td>4 105,19</td>
+            <td>Tow000001</td>
+            <td>Tow000001</td>
+            <td>5900000000015</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Narty ATOMICUS POP</td>
+            <td>T</td>
+            <td>14,0000</td>
+            <td>14,0000</td>
+            <td>0,0000</td>
+            <td>para</td>
+            <td>3 779,90</td>
+            <td>4 549,28</td>
+            <td>Tow000002</td>
+            <td>Tow000002</td>
+            <td>5900000000022</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Narty NONAME BASIC</td>
+            <td>T</td>
+            <td>15,0000</td>
+            <td>15,0000</td>
+            <td>0,0000</td>
+            <td>para</td>
+            <td>1 219,95</td>
+            <td>1 469,34</td>
+            <td>Tow000003</td>
+            <td>Tow000003</td>
+            <td>5900000000039</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Narty HEADEX LUX</td>
+            <td>T</td>
+            <td>14,0000</td>
+            <td>14,0000</td>
+            <td>0,0000</td>
+            <td>para</td>
+            <td>5 965,57</td>
+            <td>6 053,52</td>
+            <td>Tow000004</td>
+            <td>Tow000004</td>
+            <td>5900000000046</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Narty HEADEX POP</td>
+            <td>T</td>
+            <td>15,0000</td>
+            <td>15,0000</td>
+            <td>0,0000</td>
+            <td>para</td>
+            <td>1 910,42</td>
+            <td>2 349,62</td>
+            <td>Tow000005</td>
+            <td>Tow000005</td>
+            <td>5900000000053</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Deska ATOMICUS LUX</td>
+            <td>T</td>
+            <td>6,0000</td>
+            <td>6,0000</td>
+            <td>0,0000</td>
+            <td>szt.</td>
+            <td>2 151,00</td>
+            <td>2 903,85</td>
+            <td>Tow000006</td>
+            <td>Tow000006</td>
+            <td>5900000000060</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr class="highlighted-row">
+            <td>Deska ATOMICUS POP</td>
+            <td>T</td>
+            <td>2,0000</td>
+            <td>2,0000</td>
+            <td>5,0000</td>
+            <td>szt.</td>
+            <td>550,80</td>
+            <td>1 169,45</td>
+            <td>Tow000007</td>
+            <td>Tow000007</td>
+            <td>5900000000077</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Deska HEADEX LUX</td>
+            <td>T</td>
+            <td>20,0000</td>
+            <td>20,0000</td>
+            <td>0,0000</td>
+            <td>szt.</td>
+            <td>4 487,15</td>
+            <td>5 057,65</td>
+            <td>Tow000008</td>
+            <td>Tow000008</td>
+            <td>5900000000084</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Deska NONAME BASIC</td>
+            <td>T</td>
+            <td>33,0000</td>
+            <td>33,0000</td>
+            <td>0,0000</td>
+            <td>szt.</td>
+            <td>737,21</td>
+            <td>923,80</td>
+            <td>Tow000009</td>
+            <td>Tow000009</td>
+            <td>5900000000091</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Kuchenka mikrofalowa ARI LUX T</td>
+            <td>T</td>
+            <td>34,0000</td>
+            <td>34,0000</td>
+            <td>0,0000</td>
+            <td>szt.</td>
+            <td>460,00</td>
+            <td>621,00</td>
+            <td>Tow000016</td>
+            <td>Tow000016</td>
+            <td>5900000000107</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Kuchenka mikrofalowa ARI PO T</td>
+            <td>T</td>
+            <td>33,0000</td>
+            <td>33,0000</td>
+            <td>0,0000</td>
+            <td>szt.</td>
+            <td>350,00</td>
+            <td>430,50</td>
+            <td>Tow000017</td>
+            <td>Tow000017</td>
+            <td>5900000000114</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+          <tr>
+            <td>Kuchenka mikrofalowa ARI BA T</td>
+            <td>T</td>
+            <td>37,0000</td>
+            <td>37,0000</td>
+            <td>10,0000</td>
+            <td>szt.</td>
+            <td>180,00</td>
+            <td>219,00</td>
+            <td>Tow000018</td>
+            <td>Tow000018</td>
+            <td>5900000000121</td>
+            <td><a href="produkt.html" class="select-btn">Wybierz</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="pagination">
+      <button>&laquo;</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>&raquo;</button>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obsługa wyszukiwania
+      const searchBox = document.getElementById('searchBox');
+      searchBox.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#productsTable tbody tr');
+        
+        rows.forEach(row => {
+          const productName = row.cells[0].textContent.toLowerCase();
+          const productCode = row.cells[8].textContent.toLowerCase();
+          const productBarcode = row.cells[10].textContent.toLowerCase();
+          
+          if (productName.includes(searchTerm) || 
+              productCode.includes(searchTerm) || 
+              productBarcode.includes(searchTerm)) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+      
+      // Obsługa odświeżania (symulacja)
+      const refreshBtn = document.getElementById('refreshBtn');
+      refreshBtn.addEventListener('click', function() {
+        alert('Odświeżanie listy produktów...');
+        // W rzeczywistej aplikacji tutaj byłby kod do ponownego pobrania danych z serwera
+      });
+      
+      // Obsługa paginacji (symulacja)
+      const paginationButtons = document.querySelectorAll('.pagination button');
+      paginationButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          if (!this.classList.contains('active')) {
+            document.querySelector('.pagination button.active').classList.remove('active');
+            this.classList.add('active');
+            alert('Przechodzenie do strony: ' + this.textContent);
+            // W rzeczywistej aplikacji tutaj byłby kod do zmiany strony
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

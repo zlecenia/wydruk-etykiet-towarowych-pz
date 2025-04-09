@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Szczegóły produktu</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .product-details {
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+    
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .product-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .product-code {
+      font-size: 16px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .product-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .info-item {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .info-label {
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    
+    .info-value {
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .label-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    
+    .label-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      min-width: 150px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .label-name {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 16px;
+    }
+    
+    .label-quantity {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    
+    .label-quantity label {
+      margin-right: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+    
+    .label-quantity input {
+      width: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .label-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .small-label-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+    
+    .big-label-btn {
+      background-color: #009688;
+      color: white;
+    }
+    
+    .carton-label-btn {
+      background-color: #ff9800;
+      color: white;
+    }
+    
+    .foil-label-btn {
+      background-color: #673ab7;
+      color: white;
+    }
+    
+    .small-label-btn:hover { background-color: #0b7dda; }
+    .big-label-btn:hover { background-color: #00796b; }
+    .carton-label-btn:hover { background-color: #e68a00; }
+    .foil-label-btn:hover { background-color: #512da8; }
+    
+    .back-btn {
+      margin: 20px 0;
+      padding: 10px 15px;
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .back-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .back-btn::before {
+      content: "←";
+      margin-right: 5px;
+    }
+    
+    /* Dodatkowe style dla mniejszych ekranów */
+    @media (max-width: 768px) {
+      .product-header {
+        flex-direction: column;
+      }
+      
+      .label-option {
+        min-width: calc(50% - 20px);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .label-option {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="back-btn" onclick="history.back()">Powrót do listy</button>
+    
+    <div class="product-details">
+      <div class="product-header">
+        <div>
+          <div class="product-name">Deska ATOMICUS POP</div>
+          <div class="product-code">Kod: Tow000007</div>
+        </div>
+        <div>
+          <div class="info-label">Kod kreskowy:</div>
+          <div class="info-value">5900000000077</div>
+        </div>
+      </div>
+      
+      <div class="product-info">
+        <div class="info-item">
+          <div class="info-label">Ilość dostępna:</div>
+          <div class="info-value">2,000 szt.</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Cena netto:</div>
+          <div class="info-value">550,80 PLN</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Cena brutto:</div>
+          <div class="info-value">1 159,45 PLN</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Indeks handlowy:</div>
+          <div class="info-value">Tow000007</div>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Drukowanie etykiet</h2>
+    
+    <div class="label-options">
+      <div class="label-option">
+        <div class="label-name">Mała</div>
+        <div class="label-quantity">
+          <label>Ilość:</label>
+          <input type="number" class="quantity-input" value="1" min="1" data-label-type="mala">
+        </div>
+        <button class="label-btn small-label-btn" onclick="showPrintModal('Tow000007', 'Deska ATOMICUS POP', 'mala')">Drukuj</button>
+      </div>
+      
+      <div class="label-option">
+        <div class="label-name">Duża</div>
+        <div class="label-quantity">
+          <label>Ilość:</label>
+          <input type="number" class="quantity-input" value="1" min="1" data-label-type="duza">
+        </div>
+        <button class="label-btn big-label-btn" onclick="showPrintModal('Tow000007', 'Deska ATOMICUS POP', 'duza')">Drukuj</button>
+      </div>
+      
+      <div class="label-option">
+        <div class="label-name">Kartonik</div>
+        <div class="label-quantity">
+          <label>Ilość:</label>
+          <input type="number" class="quantity-input" value="1" min="1" data-label-type="kartonik">
+        </div>
+        <button class="label-btn carton-label-btn" onclick="showPrintModal('Tow000007', 'Deska ATOMICUS POP', 'kartonik')">Drukuj</button>
+      </div>
+      
+      <div class="label-option">
+        <div class="label-name">Folia</div>
+        <div class="label-quantity">
+          <label>Ilość:</label>
+          <input type="number" class="quantity-input" value="1" min="1" data-label-type="folia">
+        </div>
+        <button class="label-btn foil-label-btn" onclick="showPrintModal('Tow000007', 'Deska ATOMICUS POP', 'folia')">Drukuj</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal dla podglądu etykiety -->
+  <div class="modal" id="previewModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closePreview()">&times;</span>
+      
+      <div class="preview-header">
+        <h2 id="previewTitle">Podgląd etykiety</h2>
+        <div class="preview-actions">
+          <button class="action-btn print-btn" id="printFromPreviewBtn">Drukuj</button>
+        </div>
+      </div>
+      
+      <div id="previewContent">
+        <iframe id="htmlPreview" class="preview-frame" style="display: none"></iframe>
+        <pre id="zplPreview" class="zpl-content" style="display: none"></pre>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal do wyboru ilości etykiet do druku -->
+  <div class="print-modal" id="printModal">
+    <div class="print-modal-content">
+      <span class="close-modal" onclick="closePrintModal()">&times;</span>
+      <h3 id="printModalTitle">Ilość etykiet do druku</h3>
+      <input type="number" class="print-quantity-input" id="printQuantity" value="1" min="1">
+      <button class="print-confirm-btn" onclick="confirmPrint()">Drukuj</button>
+    </div>
+  </div>
+  
+  <script src="labels.js"></script>
+  <script>
+    // Globalne zmienne
+    let currentItem = "Tow000007";
+    let currentItemName = "Deska ATOMICUS POP";
+    let currentLabelType = null;
+    
+    // Funkcja pokazująca modal z wyborem ilości etykiet do druku
+    function showPrintModal(itemId, itemName, labelType) {
+      currentItem = itemId;
+      currentItemName = itemName;
+      currentLabelType = labelType;
+      
+      // Ustaw tytuł modalu
+      document.getElementById('printModalTitle').textContent = `Ilość etykiet "${labelTypes[labelType].name}" do druku`;
+      
+      // Pobierz wartość z pola ilości do druku dla tego produktu i konkretnego typu etykiety
+      const quantityInput = document.querySelector(`.quantity-input[data-label-type="${labelType}"]`);
+      if (quantityInput) {
+        document.getElementById('printQuantity').value = quantityInput.value;
+      } else {
+        document.getElementById('printQuantity').value = 1;
+      }
+      
+      // Wyświetl modal
+      document.getElementById('printModal').style.display = 'block';
+    }
+    
+    // Zamyka modal z wyborem ilości etykiet
+    function closePrintModal() {
+      document.getElementById('printModal').style.display = 'none';
+    }
+    
+    // Potwierdza druk etykiet
+    async function confirmPrint() {
+      const quantity = parseInt(document.getElementById('printQuantity').value);
+      
+      if (quantity < 1) {
+        alert('Ilość etykiet musi być większa od 0.');
+        return;
+      }
+      
+      try {
+        // Aktualizacja ilości w tabeli dla konkretnego typu etykiety
+        const quantityInput = document.querySelector(`.quantity-input[data-label-type="${currentLabelType}"]`);
+        if (quantityInput) {
+          quantityInput.value = quantity;
+        }
+        
+        // W rzeczywistej aplikacji tutaj byłoby wysyłanie żądania do API drukowania
+        console.log(`Drukowanie ${quantity} etykiet typu ${currentLabelType} dla ${currentItemName} (${currentItem})`);
+        
+        // Wyświetl potwierdzenie
+        alert(`Wydrukowano ${quantity} etykiet typu "${labelTypes[currentLabelType].name}" dla "${currentItemName}"`);
+        
+        // Zamknij modal
+        closePrintModal();
+        
+      } catch (error) {
+        console.error('Błąd podczas drukowania etykiet:', error);
+        alert('Wystąpił błąd podczas drukowania etykiet.');
+      }
+    }
+    
+    // Pokazuje podgląd etykiety
+    function previewLabel(itemId, itemName, labelType, format) {
+      const modal = document.getElementById('previewModal');
+      const title = document.getElementById('previewTitle');
+      const htmlPreview = document.getElementById('htmlPreview');
+      const zplPreview = document.getElementById('zplPreview');
+      
+      currentItem = itemId;
+      currentItemName = itemName;
+      currentLabelType = labelType;
+      
+      // Ukryj wszystkie podglądy
+      htmlPreview.style.display = 'none';
+      zplPreview.style.display = 'none';
+      
+      // Ustaw tytuł modalu
+      const labelName = labelTypes[labelType].name;
+      title.textContent = `Podgląd etykiety "${labelName}" dla "${itemName}"`;
+      
+      // Wyświetl odpowiedni podgląd
+      if (format === 'html') {
+        htmlPreview.style.display = 'block';
+        
+        // Wygeneruj i pokaż etykietę HTML
+        const htmlContent = previewHTMLLabel(itemId, itemName, labelType);
+        
+        const doc = htmlPreview.contentDocument;
+        doc.open();
+        doc.write(htmlContent);
+        doc.close();
+      } else if (format === 'zpl') {
+        // Pokaż kod ZPL
+        zplPreview.style.display = 'block';
+        zplPreview.textContent = previewZPLLabel(itemId, itemName, labelType);
+      }
+      
+      // Wyświetl modal
+      modal.style.display = 'block';
+    }
+    
+    // Zamyka modal z podglądem etykiety
+    function closePreview() {
+      document.getElementById('previewModal').style.display = 'none';
+    }
+    
+    // Typy etykiet (uzupełnij, jeśli brakuje labels.js)
+    const labelTypes = {
+      mala: {
+        name: "Mała",
+        width: "50mm",
+        height: "30mm",
+        fontSize: "small"
+      },
+      duza: {
+        name: "Duża",
+        width: "100mm",
+        height: "60mm",
+        fontSize: "large"
+      },
+      kartonik: {
+        name: "Kartonik",
+        width: "70mm",
+        height: "50mm",
+        fontSize: "medium"
+      },
+      folia: {
+        name: "Folia",
+        width: "80mm",
+        height: "40mm",
+        fontSize: "medium"
+      }
+    };
+    
+    // Funkcja generująca zawartość etykiety HTML (uzupełnij, jeśli brakuje labels.js)
+    function previewHTMLLabel(itemId, itemName, labelType) {
+      const labelConfig = labelTypes[labelType] || labelTypes.mala;
+      
+      // Określenie rozmiaru czcionki w zależności od typu etykiety
+      let titleSize, codeSize, dateSize;
+      
+      if (labelConfig.fontSize === "small") {
+        titleSize = "12pt";
+        codeSize = "8pt";
+        dateSize = "7pt";
+      } else if (labelConfig.fontSize === "large") {
+        titleSize = "18pt";
+        codeSize = "12pt";
+        dateSize = "10pt";
+      } else {
+        titleSize = "14pt";
+        codeSize = "10pt";
+        dateSize = "8pt";
+      }
+      
+      return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            width: ${labelConfig.width};
+            height: ${labelConfig.height};
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 5mm;
+          }
+          .label {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+          }
+          .product-code {
+            font-size: ${codeSize};
+            color: #666;
+          }
+          .product-name {
+            font-size: ${titleSize};
+            font-weight: bold;
+            margin: 4mm 0;
+          }
+          .barcode {
+            text-align: center;
+            margin: 3mm 0;
+            font-family: 'Libre Barcode 128', cursive;
+            font-size: 36pt;
+          }
+          .date {
+            font-size: ${dateSize};
+            color: #666;
+            margin-top: auto;
+          }
+          .label-type {
+            position: absolute;
+            top: 2mm;
+            right: 2mm;
+            font-size: 7pt;
+            color: #999;
+          }
+        </style>
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap" rel="stylesheet">
+      </head>
+      <body>
+        <div class="label">
+          <div class="label-type">Etykieta: ${labelConfig.name}</div>
+          <div class="product-code">${itemId}</div>
+          <div class="product-name">${itemName}</div>
+          <div class="barcode">*${itemId}*</div>
+          <div class="date">Data wydruku: ${new Date().toLocaleDateString('pl-PL')}</div>
+        </div>
+      </body>
+      </html>
+      `;
+    }
+    
+    // Funkcja generująca kod ZPL dla etykiety (uzupełnij, jeśli brakuje labels.js)
+    function previewZPLLabel(itemId, itemName, labelType) {
+      const labelConfig = labelTypes[labelType] || labelTypes.mala;
+      const date = new Date().toLocaleDateString('pl-PL');
+      
+      // Dostosowanie parametrów ZPL w zależności od typu etykiety
+      let width, height, titleY, titleFontSize, codeFontSize, barcodeHeight;
+      
+      if (labelType === "mala") {
+        width = 400;
+        height = 240;
+        titleY = 80;
+        titleFontSize = 25;
+        codeFontSize = 20;
+        barcodeHeight = 60;
+      } else if (labelType === "duza") {
+        width = 800;
+        height = 480;
+        titleY = 120;
+        titleFontSize = 40;
+        codeFontSize = 30;
+        barcodeHeight = 100;
+      } else if (labelType === "kartonik") {
+        width = 560;
+        height = 400;
+        titleY = 100;
+        titleFontSize = 35;
+        codeFontSize = 25;
+        barcodeHeight = 80;
+      } else { // folia
+        width = 640;
+        height = 320;
+        titleY = 90;
+        titleFontSize = 30;
+        codeFontSize = 25;
+        barcodeHeight = 70;
+      }
+      
+      return `^XA
+
+^FO20,30^A0N,${codeFontSize},${codeFontSize}^FD${itemId}^FS
+^FO20,${titleY}^A0N,${titleFontSize},${titleFontSize}^FD${itemName}^FS
+^FO20,${titleY + 60}^BY3
+^BCN,${barcodeHeight},Y,N,N
+^FD${itemId}^FS
+^FO20,${height - 50}^A0N,20,20^FDData wydruku: ${date}^FS
+^FO${width - 120},20^A0N,20,20^FD${labelConfig.name}^FS
+
+^XZ`;
+    }
+    
+    // Inicjalizacja zdarzeń po załadowaniu strony
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicjalizacja obsługi zamykania modali po kliknięciu poza nimi
+      window.addEventListener('click', function(event) {
+        const previewModal = document.getElementById('previewModal');
+        const printModal = document.getElementById('printModal');
+        
+        if (event.target === previewModal) {
+          closePreview();
+        }
+        
+        if (event.target === printModal) {
+          closePrintModal();
+        }
+      });
+      
+      // Dodaj event listener do przycisku drukowania w modalu podglądu
+      document.getElementById('printFromPreviewBtn').addEventListener('click', function() {
+        if (currentItem && currentItemName && currentLabelType) {
+          showPrintModal(currentItem, currentItemName, currentLabelType);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
