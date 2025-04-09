@@ -94,11 +94,15 @@ function renderItemsTable(items) {
   tbody.innerHTML = '';
   
   items.forEach(item => {
-    const row = document.createElement('tr');
+    // Wiersze przechowujące dane pozycji oraz opcje drukowania
+    const mainRow = document.createElement('tr');
+    const printingRow = document.createElement('tr');
+    
+    printingRow.className = 'printing-row';
     
     // W wersji mobilnej używamy innego układu
     if (window.innerWidth <= 768) {
-      row.innerHTML = `
+      mainRow.innerHTML = `
         <td class="checkbox-column">
           <input type="checkbox" name="selectedItems" value="${item.id}" class="item-checkbox">
         </td>
@@ -108,45 +112,98 @@ function renderItemsTable(items) {
             <div class="item-details">Kod: ${item.id} | Ilość: ${item.quantity} ${item.unit}</div>
           </div>
         </td>
-        <td>
-          <div class="item-quantity">
-            <label>Ilość do druku:</label>
-            <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}">
-          </div>
-          <div class="label-buttons">
-            <button class="label-btn small-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="mala">Mała</button>
-            <button class="label-btn big-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="duza">Duża</button>
-            <button class="label-btn carton-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="kartonik">Kartonik</button>
-            <button class="label-btn foil-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="folia">Folia</button>
+      `;
+      
+      printingRow.innerHTML = `
+        <td colspan="5">
+          <div class="label-options">
+            <div class="label-option">
+              <div class="label-name">Mała</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="mala">
+              </div>
+              <button class="label-btn small-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="mala">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Duża</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="duza">
+              </div>
+              <button class="label-btn big-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="duza">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Kartonik</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="kartonik">
+              </div>
+              <button class="label-btn carton-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="kartonik">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Folia</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="folia">
+              </div>
+              <button class="label-btn foil-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="folia">Drukuj</button>
+            </div>
           </div>
         </td>
       `;
     } else {
       // Wersja dla większych ekranów
-      row.innerHTML = `
-        <td class="checkbox-column">
+      mainRow.innerHTML = `
+        <td class="checkbox-column" rowspan="2">
           <input type="checkbox" name="selectedItems" value="${item.id}">
         </td>
         <td>${item.name}</td>
         <td>${item.id}</td>
         <td>${item.quantity}</td>
         <td>${item.unit}</td>
-        <td>
-          <div class="item-quantity">
-            <label>Ilość do druku:</label>
-            <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}">
-          </div>
-          <div class="label-buttons">
-            <button class="label-btn small-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="mala">Mała</button>
-            <button class="label-btn big-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="duza">Duża</button>
-            <button class="label-btn carton-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="kartonik">Kartonik</button>
-            <button class="label-btn foil-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="folia">Folia</button>
+      `;
+      
+      printingRow.innerHTML = `
+        <td colspan="4">
+          <div class="label-options">
+            <div class="label-option">
+              <div class="label-name">Mała</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="mala">
+              </div>
+              <button class="label-btn small-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="mala">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Duża</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="duza">
+              </div>
+              <button class="label-btn big-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="duza">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Kartonik</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="kartonik">
+              </div>
+              <button class="label-btn carton-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="kartonik">Drukuj</button>
+            </div>
+            
+            <div class="label-option">
+              <div class="label-name">Folia</div>
+              <div class="label-quantity">
+                <input type="number" class="quantity-input" value="1" min="1" data-item-id="${item.id}" data-label-type="folia">
+              </div>
+              <button class="label-btn foil-label-btn" data-item-id="${item.id}" data-item-name="${item.name}" data-label-type="folia">Drukuj</button>
+            </div>
           </div>
         </td>
       `;
     }
     
-    tbody.appendChild(row);
+    tbody.appendChild(mainRow);
+    tbody.appendChild(printingRow);
   });
   
   // Dodaj event listenery do przycisków etykiet
@@ -236,8 +293,8 @@ function showPrintModal(itemId, itemName, labelType) {
   // Ustaw tytuł modalu
   document.getElementById('printModalTitle').textContent = `Ilość etykiet "${labelTypes[labelType].name}" do druku`;
   
-  // Pobierz wartość z pola ilości do druku dla tego produktu
-  const quantityInput = document.querySelector(`.quantity-input[data-item-id="${itemId}"]`);
+  // Pobierz wartość z pola ilości do druku dla tego produktu i konkretnego typu etykiety
+  const quantityInput = document.querySelector(`.quantity-input[data-item-id="${itemId}"][data-label-type="${labelType}"]`);
   if (quantityInput) {
     document.getElementById('printQuantity').value = quantityInput.value;
   } else {
@@ -263,8 +320,8 @@ async function confirmPrint() {
   }
   
   try {
-    // Aktualizacja ilości w tabeli
-    const quantityInput = document.querySelector(`.quantity-input[data-item-id="${currentItem}"]`);
+    // Aktualizacja ilości w tabeli dla konkretnego typu etykiety
+    const quantityInput = document.querySelector(`.quantity-input[data-item-id="${currentItem}"][data-label-type="${currentLabelType}"]`);
     if (quantityInput) {
       quantityInput.value = quantity;
     }
@@ -346,29 +403,46 @@ async function printSelected() {
     return;
   }
   
+  // Zapytaj użytkownika o typ etykiety dla zaznaczonych pozycji
+  const labelType = prompt('Wybierz typ etykiety do wydruku dla wszystkich zaznaczonych pozycji (mala, duza, kartonik, folia):', 'mala');
+  
+  if (!labelType || !['mala', 'duza', 'kartonik', 'folia'].includes(labelType)) {
+    alert('Niepoprawny typ etykiety. Operacja anulowana.');
+    return;
+  }
+  
   // Utwórz tablicę zadań drukowania
   const printJobs = [];
   
   selectedCheckboxes.forEach(checkbox => {
     const itemId = checkbox.value;
     const row = checkbox.closest('tr');
-    const itemName = row.cells[1].textContent || row.querySelector('.item-title').textContent;
-    const quantityInput = row.querySelector('.quantity-input');
+    
+    // Znajdź nazwę produktu
+    let itemName;
+    if (window.innerWidth <= 768) {
+      itemName = row.querySelector('.item-title').textContent;
+    } else {
+      itemName = row.cells[1].textContent;
+    }
+    
+    // Znajdź ilość dla konkretnego typu etykiety
+    const nextRow = row.nextElementSibling;
+    const quantityInput = nextRow.querySelector(`.quantity-input[data-item-id="${itemId}"][data-label-type="${labelType}"]`);
     const quantity = parseInt(quantityInput.value);
     
-    // Dodaj zadanie drukowania dla każdego zaznaczonego produktu
-    // Domyślnie używamy etykiety typu "mala"
+    // Dodaj zadanie drukowania
     printJobs.push({
       itemId,
       itemName,
-      labelType: 'mala',
+      labelType,
       quantity
     });
   });
   
   // Potwierdź z użytkownikiem
-  const confirmMessage = `Czy chcesz wydrukować ${printJobs.length} różnych etykiet? \n\n` +
-    printJobs.map(job => `- ${job.itemName}: ${job.quantity} szt. (${labelTypes[job.labelType].name})`).join('\n');
+  const confirmMessage = `Czy chcesz wydrukować ${printJobs.length} różnych etykiet typu "${labelTypes[labelType].name}"? \n\n` +
+    printJobs.map(job => `- ${job.itemName}: ${job.quantity} szt.`).join('\n');
   
   if (confirm(confirmMessage)) {
     try {
