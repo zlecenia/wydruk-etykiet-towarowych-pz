@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Przyjęcia Zewnętrzne - Przykład</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    h1, h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    
+    .items-table th {
+      background-color: #f2f2f2;
+      text-align: left;
+      padding: 12px;
+      border-bottom: 2px solid #ddd;
+    }
+    
+    .items-table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .checkbox-column {
+      width: 40px;
+      text-align: center;
+    }
+    
+    .printing-row {
+      background-color: #f9f9f9;
+      border-top: 1px dashed #ccc;
+    }
+    
+    .label-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 10px 0;
+    }
+    
+    .label-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      min-width: 100px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .label-name {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .label-quantity {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .label-quantity input {
+      width: 60px;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-align: center;
+    }
+    
+    .label-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+    }
+    
+    .small-label-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+    
+    .big-label-btn {
+      background-color: #009688;
+      color: white;
+    }
+    
+    .carton-label-btn {
+      background-color: #ff9800;
+      color: white;
+    }
+    
+    .foil-label-btn {
+      background-color: #673ab7;
+      color: white;
+    }
+    
+    .small-label-btn:hover { background-color: #0b7dda; }
+    .big-label-btn:hover { background-color: #00796b; }
+    .carton-label-btn:hover { background-color: #e68a00; }
+    .foil-label-btn:hover { background-color: #512da8; }
+    
+    /* Responsywne style dla mobilnych */
+    @media (max-width: 768px) {
+      .label-options {
+        gap: 10px;
+      }
+      
+      .label-option {
+        min-width: calc(50% - 15px);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .label-option {
+        min-width: calc(100% - 20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Pozycje dokumentu: PZ 0001/24</h2>
+    
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th class="checkbox-column">Wybierz</th>
+          <th>Nazwa artykułu</th>
+          <th>Kod towaru</th>
+          <th>Ilość</th>
+          <th>Jednostka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Pierwszy element -->
+        <tr>
+          <td class="checkbox-column" rowspan="2">
+            <input type="checkbox" name="selectedItems" value="Tow000010">
+          </td>
+          <td>Szafa trzydrzwiowa z lustrem - XR w.</td>
+          <td>Tow000010</td>
+          <td>3.000</td>
+          <td>szt.</td>
+        </tr>
+        <tr class="printing-row">
+          <td colspan="4">
+            <div class="label-options">
+              <div class="label-option">
+                <div class="label-name">Mała</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn small-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Duża</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn big-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Kartonik</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn carton-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Folia</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn foil-label-btn">Drukuj</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Drugi element -->
+        <tr>
+          <td class="checkbox-column" rowspan="2">
+            <input type="checkbox" name="selectedItems" value="Tow000011">
+          </td>
+          <td>Komoda XR w.</td>
+          <td>Tow000011</td>
+          <td>2.000</td>
+          <td>szt.</td>
+        </tr>
+        <tr class="printing-row">
+          <td colspan="4">
+            <div class="label-options">
+              <div class="label-option">
+                <div class="label-name">Mała</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn small-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Duża</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn big-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Kartonik</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn carton-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Folia</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn foil-label-btn">Drukuj</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Trzeci element -->
+        <tr>
+          <td class="checkbox-column" rowspan="2">
+            <input type="checkbox" name="selectedItems" value="Tow000012">
+          </td>
+          <td>Stolik okrągły XR w.</td>
+          <td>Tow000012</td>
+          <td>4.000</td>
+          <td>szt.</td>
+        </tr>
+        <tr class="printing-row">
+          <td colspan="4">
+            <div class="label-options">
+              <div class="label-option">
+                <div class="label-name">Mała</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn small-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Duża</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn big-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Kartonik</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn carton-label-btn">Drukuj</button>
+              </div>
+              
+              <div class="label-option">
+                <div class="label-name">Folia</div>
+                <div class="label-quantity">
+                  <input type="number" class="quantity-input" value="1" min="1">
+                </div>
+                <button class="label-btn foil-label-btn">Drukuj</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
